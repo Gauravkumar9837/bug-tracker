@@ -33,3 +33,4 @@ GET /api/issues
 Add Comment:
 POST /api/comments/{issueId}
 Deployment retry
+Retry deploy
