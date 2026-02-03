@@ -5,9 +5,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
+//
+//    @GetMapping("/welcome")
+//    public String home() {
+//        return "Login successful! Welcome to Bug Tracker.";
+//    }
 
-    @GetMapping("/welcome")
+    @GetMapping("/")
     public String home() {
-        return "Login successful! Welcome to Bug Tracker.";
+        return "Bug Tracker API Running 🚀";
     }
 }
