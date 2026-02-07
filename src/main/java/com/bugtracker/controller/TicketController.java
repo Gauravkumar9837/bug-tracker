@@ -2,51 +2,43 @@ package com.bugtracker.controller;
 
 import com.bugtracker.entity.Ticket;
 import com.bugtracker.model.Status;
-import com.bugtracker.repository.TicketRepository;
+import com.bugtracker.service.TicketService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/tickets")
-@CrossOrigin(origins = "*")   // allow frontend
+@RequestMapping("/tickets")
+@CrossOrigin
 public class TicketController {
 
-    private final TicketRepository ticketRepository;
+    private final TicketService ticketService;
 
-    public TicketController(TicketRepository ticketRepository) {
-        this.ticketRepository = ticketRepository;
+    public TicketController(TicketService ticketService) {
+        this.ticketService = ticketService;
     }
 
-    // GET ALL TICKETS
-    @GetMapping
-    public List<Ticket> getAllTickets() {
-        return ticketRepository.findAll();
-    }
-
-    // CREATE TICKET
     @PostMapping
     public Ticket createTicket(@RequestBody Ticket ticket) {
-        return ticketRepository.save(ticket);
+        return ticketService.createTicket(ticket);
     }
 
-//    @PutMapping("/tickets/{id}/status")
-//    public Ticket updateStatus(@PathVariable Long id, @RequestParam String status) {
-//        Ticket ticket = ticketRepository.findById(id).orElseThrow();
-//        ticket.setStatus(status);
-//        return ticketRepository.save(ticket);
-//    }
+    @GetMapping
+    public List<Ticket> getAllTickets() {
+        return ticketService.getAllTickets();
+    }
 
     @PutMapping("/{id}/status")
-    public Ticket updateTicketStatus(@PathVariable Long id, @RequestParam Status status) {
+    public Ticket updateStatus(@PathVariable Long id,
+                               @RequestParam String status) {
 
-        Ticket ticket = ticketRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ticket not found"));
-
-        ticket.setStatus(status);
-
-        return ticketRepository.save(ticket);
+        Status newStatus = Status.valueOf(status);  // 🔥 conversion happens here
+        return ticketService.updateStatus(id, newStatus);
     }
 
-
+    @DeleteMapping("/{id}")
+    public String deleteTicket(@PathVariable Long id) {
+        ticketService.deleteTicket(id);
+        return "Ticket deleted successfully";
+    }
 }
