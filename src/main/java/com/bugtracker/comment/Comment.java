@@ -1,55 +1,36 @@
 package com.bugtracker.comment;
 
-import com.bugtracker.issue.Issue;
+import com.bugtracker.entity.Ticket;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "COMMENTS")
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_seq")
-    @SequenceGenerator(name = "comment_seq", sequenceName = "comment_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String message;
-    private String author;
+    private String content;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "issue_id" , nullable = false)
-    private Issue issue;
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
 
-    // ===== GETTERS & SETTERS =====
+    public Comment() {}
 
-    public Long getId() {
-        return id;
+    public Comment(String content, Ticket ticket) {
+        this.content = content;
+        this.ticket = ticket;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public String getContent() { return content; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public Ticket getTicket() { return ticket; }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public Issue getIssue() {
-        return issue;
-    }
-
-    public void setIssue(Issue issue) {
-        this.issue = issue;
-    }
+    public void setContent(String content) { this.content = content; }
+    public void setTicket(Ticket ticket) { this.ticket = ticket; }
 }

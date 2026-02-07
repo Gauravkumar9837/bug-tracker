@@ -1,37 +1,26 @@
 package com.bugtracker.comment;
 
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/comments")
+@CrossOrigin
 public class CommentController {
 
-    private final CommentService commentService;
+    private final CommentService service;
 
-    public CommentController(CommentService commentService) {
-        this.commentService = commentService;
+    public CommentController(CommentService service) {
+        this.service = service;
     }
 
-    // ➕ Add comment to issue
-    @PostMapping("/{issueId}")
-    public Comment addComment(@PathVariable Long issueId,
-                              @RequestBody Comment comment) {
-        return commentService.addComment(issueId, comment);
+    @PostMapping("/{ticketId}")
+    public Comment addComment(@PathVariable Long ticketId, @RequestBody String content) {
+        return service.addComment(ticketId, content);
     }
-//    @PostMapping("/{issueId}")
-//    public Comment addComment(
-//            @PathVariable Long issueId,
-//            @RequestBody CommentRequest request) {
-//
-//        return commentService.addComment(issueId, request);
-//    }
 
-
-    // 📄 Get all comments of an issue
-    @GetMapping("/{issueId}")
-    public List<Comment> getComments(@PathVariable Long issueId) {
-        return commentService.getCommentsByIssue(issueId);
+    @GetMapping("/{ticketId}")
+    public List<Comment> getComments(@PathVariable Long ticketId) {
+        return service.getComments(ticketId);
     }
 }
