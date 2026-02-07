@@ -1,5 +1,6 @@
 package com.bugtracker.entity;
 
+import com.bugtracker.model.Status;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +12,9 @@ public class Ticket {
 
     private String title;
     private String description;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
 
     // getters and setters
     public Ticket() {}
@@ -25,7 +28,13 @@ public class Ticket {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
 }
 

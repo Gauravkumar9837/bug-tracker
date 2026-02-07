@@ -1,6 +1,7 @@
 package com.bugtracker.controller;
 
 import com.bugtracker.entity.Ticket;
+import com.bugtracker.model.Status;
 import com.bugtracker.repository.TicketRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,11 +30,23 @@ public class TicketController {
         return ticketRepository.save(ticket);
     }
 
-    @PutMapping("/tickets/{id}/status")
-    public Ticket updateStatus(@PathVariable Long id, @RequestParam String status) {
-        Ticket ticket = ticketRepository.findById(id).orElseThrow();
+//    @PutMapping("/tickets/{id}/status")
+//    public Ticket updateStatus(@PathVariable Long id, @RequestParam String status) {
+//        Ticket ticket = ticketRepository.findById(id).orElseThrow();
+//        ticket.setStatus(status);
+//        return ticketRepository.save(ticket);
+//    }
+
+    @PutMapping("/{id}/status")
+    public Ticket updateTicketStatus(@PathVariable Long id, @RequestParam Status status) {
+
+        Ticket ticket = ticketRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+
         ticket.setStatus(status);
+
         return ticketRepository.save(ticket);
     }
+
 
 }
