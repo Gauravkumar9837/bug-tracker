@@ -28,4 +28,12 @@ public class TicketController {
     public Ticket createTicket(@RequestBody Ticket ticket) {
         return ticketRepository.save(ticket);
     }
+
+    @PutMapping("/tickets/{id}/status")
+    public Ticket updateStatus(@PathVariable Long id, @RequestParam String status) {
+        Ticket ticket = ticketRepository.findById(id).orElseThrow();
+        ticket.setStatus(status);
+        return ticketRepository.save(ticket);
+    }
+
 }
