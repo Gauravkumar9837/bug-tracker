@@ -15,7 +15,7 @@ public class CommentController {
     }
 
     @PostMapping("/{ticketId}")
-    public Comment addComment(@PathVariable Long ticketId, @RequestBody String content) {
+    public Comment addComment(@PathVariable Long ticketId, @RequestParam String content) {
         return service.addComment(ticketId, content);
     }
 
