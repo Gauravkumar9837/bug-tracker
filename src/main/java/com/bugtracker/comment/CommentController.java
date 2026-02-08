@@ -1,4 +1,5 @@
 package com.bugtracker.comment;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bugtracker.entity.Ticket;
 import com.bugtracker.repository.TicketRepository;
