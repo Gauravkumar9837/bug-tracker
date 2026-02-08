@@ -1,5 +1,7 @@
 package com.bugtracker.comment;
 
+import com.bugtracker.entity.Ticket;
+import com.bugtracker.repository.TicketRepository;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -18,6 +20,8 @@ public class CommentController {
     public Comment addComment(@PathVariable Long ticketId, @RequestParam String message) {
         return service.addComment(ticketId, message);
     }
+
+
 
     @GetMapping("/{ticketId}")
     public List<Comment> getComments(@PathVariable Long ticketId) {

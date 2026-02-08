@@ -17,11 +17,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment addComment(Long ticketId, String content) {
+    public Comment addComment(Long ticketId, String message) {
         Ticket ticket = ticketRepo.findById(ticketId)
                 .orElseThrow(() -> new RuntimeException("Ticket not found"));
 
-        Comment comment = new Comment(content, ticket);
+        Comment comment = new Comment(message, ticket);
         return commentRepo.save(comment);
     }
 

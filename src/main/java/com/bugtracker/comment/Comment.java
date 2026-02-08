@@ -11,7 +11,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String content;
+    private String message;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -21,16 +21,16 @@ public class Comment {
 
     public Comment() {}
 
-    public Comment(String content, Ticket ticket) {
-        this.content = content;
+    public Comment(String message, Ticket ticket) {
+        this.message = message;
         this.ticket = ticket;
     }
 
     public Long getId() { return id; }
-    public String getContent() { return content; }
+    public String getMessage() { return message; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public Ticket getTicket() { return ticket; }
 
-    public void setContent(String content) { this.content = content; }
+    public void setMessage(String message) { this.message = message; }
     public void setTicket(Ticket ticket) { this.ticket = ticket; }
 }
