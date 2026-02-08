@@ -1,35 +1,23 @@
-# Bug Tracker System (Jira Clone)
+# Bug Tracker System
 
-A full-stack issue tracking system built with Spring Boot and React.
+A full-stack issue tracking system similar to Jira.
 
-## 🚀 Features
+## Features
 - JWT Authentication
-- Role Based Access (Admin, Manager, Developer)
-- Project & Issue Management
-- Assign Issues to Users
-- Kanban Workflow (TODO → IN_PROGRESS → DONE)
-- Comments on Issues
-- Search & Filters
+- Create, update, delete tickets
+- Ticket status workflow (TODO → IN_PROGRESS → DONE)
+- Comments on tickets
+- Search & filter tickets
+- REST APIs with Swagger documentation
 
-## 🛠 Tech Stack
-Backend:
-- Java 17
-- Spring Boot
-- Spring Security + JWT
-- JPA / Hibernate
-- Oracle / MySQL
+## Tech Stack
+Backend: Spring Boot, JPA, Hibernate, PostgreSQL  
+Frontend: React, Axios  
+Security: Spring Security + JWT  
 
-Frontend:
-- React
-- Tailwind CSS
+## API Documentation
+Swagger: https://your-render-url/swagger-ui.html
 
-## 📌 API Examples
-Create Issue:
-POST /api/issues
-
-Get Issues:
-GET /api/issues
-
-Add Comment:
-POST /api/comments/{issueId}
-
+## Deployment
+Backend hosted on Render  
+Frontend running on React
