@@ -22,7 +22,6 @@ public class CommentController {
     }
 
 
-
     @GetMapping("/{ticketId}")
     public List<Comment> getComments(@PathVariable Long ticketId) {
         return service.getComments(ticketId);
